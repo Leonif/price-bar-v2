@@ -40,10 +40,19 @@ struct MainView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(.black)
             case .new:
-                TextField("Введите свое имя", text: $newName)
+                TextField("Введите название", text: $newName)
                     .font(.system(size: 25, weight: .semibold))
                     .multilineTextAlignment(.center)
                     .foregroundColor(.green)
+            }
+            
+            var mainButtonEnabled : Bool {
+                switch info {
+                case .new:
+                    return newName != "" && newPrice != ""
+                default:
+                    return true
+                }
             }
             
             Button(action: {
@@ -72,9 +81,12 @@ struct MainView: View {
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(4)
-            }.padding(.top, 16)
+            }
+            .disabled(!mainButtonEnabled)
+            .padding(.top, 16)
             
             if product != nil {
+                
                 HStack {
                     TextField("Введите цену", text: $newPrice)
                         .font(.system(size: 30, weight: .bold))
@@ -83,6 +95,10 @@ struct MainView: View {
                         .keyboardType(.decimalPad)
                     
                     if !info.isNew {
+                        var priceButtonEnabled : Bool {
+                            return newPrice != ""
+                        }
+                        
                         Button {
                             let price = Pricing(date: .now, price: newPrice)
                             price.product = product
@@ -95,7 +111,7 @@ struct MainView: View {
                                 .background(Color.green)
                                 .foregroundColor(.white)
                                 .cornerRadius(4)
-                        }
+                        }.disabled(!priceButtonEnabled)
                     }
                 }
             }

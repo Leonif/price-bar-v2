@@ -116,6 +116,7 @@ class Product {
 
 @Model
 class Pricing {
+    let id = UUID().uuidString
     let date: Date
     let price: String
     
