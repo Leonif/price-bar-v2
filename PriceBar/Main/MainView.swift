@@ -27,24 +27,7 @@ struct MainView: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            
-            Text(product?.barcode ?? "...")
-                .font(.system(size: 16, weight: .light))
-                .multilineTextAlignment(.center)
-                .foregroundColor(.black)
-            
-            switch info {
-            case .idle, .found:
-                Text(product?.name ?? "...")
-                    .font(.system(size: 25, weight: .semibold))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.black)
-            case .new:
-                TextField("Введите название", text: $newName)
-                    .font(.system(size: 25, weight: .semibold))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.green)
-            }
+            ProductNameInputView(info: info, product: product, newName: $newName)
             
             var mainButtonEnabled : Bool {
                 switch info {
@@ -85,57 +68,11 @@ struct MainView: View {
             .disabled(!mainButtonEnabled)
             .padding(.top, 16)
             
-            if product != nil {
-                
-                HStack {
-                    TextField("Введите цену", text: $newPrice)
-                        .font(.system(size: 30, weight: .bold))
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.blue)
-                        .keyboardType(.decimalPad)
-                    
-                    if !info.isNew {
-                        var priceButtonEnabled : Bool {
-                            return newPrice != ""
-                        }
-                        
-                        Button {
-                            let price = Pricing(date: .now, price: newPrice)
-                            price.product = product
-                            viewModel.newPriceTapSubject.send(price)
-                            newPrice = ""
-                            hideKeyboard()
-                        } label: {
-                            Text("+")
-                                .frame(width: 40, height: 40)
-                                .background(Color.green)
-                                .foregroundColor(.white)
-                                .cornerRadius(4)
-                        }.disabled(!priceButtonEnabled)
-                    }
-                }
+            PriceInputView(info: info, product: product, newPrice: $newPrice) { [weak viewModel] price in
+                viewModel?.newPriceTapSubject.send(price)
             }
-            
-            VStack(alignment: .leading, spacing: 4) {
-                ForEach(priceTitle(product: product), id: \.price) { (date, price) in
-                    HStack {
-                        Text(date)
-                            .font(.system(size: 14, weight: .bold))
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.blue)
-                        
-                        Text(":")
-                            .font(.system(size: 14, weight: .bold))
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.black)
-                        
-                        Text(price)
-                            .font(.system(size: 14, weight: .bold))
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.green)
-                    }
-                }
-            }
+
+            PriceListView(product: $product)
         }
         .padding(16)
         .background(Color.white)
@@ -155,17 +92,6 @@ struct MainView: View {
             }
         }
         .onReceive(viewModel.scanButtonTapSubject) { _ in  }
-    }
-    
-    private func priceTitle(product: Product?) -> [(date: String, price: String)] {
-        guard let product else { return [] }
-
-        let pricing = Array(product.pricing.prefix(10))
-        
-        return pricing.map { price in
-            let date = price.date.formatted(.dateTime.day().month().year())
-            return (date, price.price)
-        }
     }
 }
 

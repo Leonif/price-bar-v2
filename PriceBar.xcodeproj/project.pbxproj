@@ -22,6 +22,9 @@
 		33E45D2D2B08B55E003A335D /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E45D252B08B55E003A335D /* Model.framework */; };
 		33E45D2E2B08B55E003A335D /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33E45D252B08B55E003A335D /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		33E595E62A478B76001FED1F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E595E52A478B76001FED1F /* MainView.swift */; };
+		33FE00992B1A5D5600CC4441 /* ProductNameInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE00982B1A5D5600CC4441 /* ProductNameInputView.swift */; };
+		33FE009B2B1A613D00CC4441 /* PriceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE009A2B1A613D00CC4441 /* PriceListView.swift */; };
+		33FE009D2B1A647500CC4441 /* PriceInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE009C2B1A647500CC4441 /* PriceInputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,9 @@
 		33E45D272B08B55E003A335D /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		33E45D282B08B55E003A335D /* Model.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Model.docc; sourceTree = "<group>"; };
 		33E595E52A478B76001FED1F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		33FE00982B1A5D5600CC4441 /* ProductNameInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductNameInputView.swift; sourceTree = "<group>"; };
+		33FE009A2B1A613D00CC4441 /* PriceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceListView.swift; sourceTree = "<group>"; };
+		33FE009C2B1A647500CC4441 /* PriceInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceInputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +141,9 @@
 			children = (
 				336890442A3F598E0080E02A /* MainViewModel.swift */,
 				33E595E52A478B76001FED1F /* MainView.swift */,
+				33FE00982B1A5D5600CC4441 /* ProductNameInputView.swift */,
+				33FE009C2B1A647500CC4441 /* PriceInputView.swift */,
+				33FE009A2B1A613D00CC4441 /* PriceListView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -260,8 +269,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33FE009B2B1A613D00CC4441 /* PriceListView.swift in Sources */,
+				33FE009D2B1A647500CC4441 /* PriceInputView.swift in Sources */,
 				3368903E2A3F55E50080E02A /* BarcodeScannerView.swift in Sources */,
 				336890402A3F57BF0080E02A /* MainCoordinator.swift in Sources */,
+				33FE00992B1A5D5600CC4441 /* ProductNameInputView.swift in Sources */,
 				3368903C2A3F54B30080E02A /* BaseViewController.swift in Sources */,
 				336890292A3F3A210080E02A /* BarcodeScannerViewController.swift in Sources */,
 				336890252A3F3A210080E02A /* AppDelegate.swift in Sources */,
