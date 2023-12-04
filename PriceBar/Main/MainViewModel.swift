@@ -25,6 +25,11 @@ final class MainViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
+    var fixArray: [Product] = [
+        .init(barcode: "9786178120924", name: "Метью Перрі. Друзі, коханки і велика халепа"),
+        .init(barcode: "9786176796541", name: "Бодо Шефер. Шлях до фінансової свободи")
+    ]
+    
     
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
@@ -39,8 +44,35 @@ final class MainViewModel: ObservableObject {
             products = try modelContext.fetch(fetchProductDescriptor)
             pricing = try modelContext.fetch(fetchPricingDescriptor)
             
+            cleanIfNeed()
+            fixProductsIfNeed()
+            printPricing()
+            
         } catch let error {
             debugPrint(error)
+        }
+    }
+    
+    private func printPricing() {
+        pricing.forEach { pricing in
+            guard let product = pricing.product else { return }
+            debugPrint("\(pricing.date) barcode: \(product.barcode) name: \(product.name) price: \(pricing.price)")
+        }
+    }
+    
+    private func cleanIfNeed() {
+        pricing.forEach { pricing in
+            if pricing.price.isEmpty {
+                modelContext.delete(pricing)
+            }
+        }
+    }
+    
+    private func fixProductsIfNeed() {
+        for (index, product) in products.enumerated() {
+            if let pr = fixArray.first(where: { $0.barcode == product.barcode }) {
+                products[index].name = pr.name
+            }
         }
     }
     
@@ -80,7 +112,6 @@ final class MainViewModel: ObservableObject {
             }
         }.store(in: &cancellables)
     }
-    
 }
 
 
@@ -96,36 +127,5 @@ extension MainViewModel {
             default: return false
             }
         }
-    }
-}
-
-@Model
-class Product {
-    let barcode: String
-    let name: String
-    
-    static let empty = Product(barcode: "...", name: "...")
-    
-    @Relationship var pricing: [Pricing]
-    init(barcode: String, name: String) {
-        self.barcode = barcode
-        self.name = name
-        self.pricing = []
-    }
-}
-
-@Model
-class Pricing {
-    let id = UUID().uuidString
-    let date: Date
-    let price: String
-    
-    static let empty = Pricing(date: Date(), price: "...")
-    
-    @Relationship var product: Product?
-    init(date: Date, price: String) {
-        self.date = date
-        self.price = price
-        self.product = nil
     }
 }

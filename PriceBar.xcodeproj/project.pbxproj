@@ -17,6 +17,9 @@
 		3368903E2A3F55E50080E02A /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3368903D2A3F55E50080E02A /* BarcodeScannerView.swift */; };
 		336890402A3F57BF0080E02A /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3368903F2A3F57BF0080E02A /* MainCoordinator.swift */; };
 		336890452A3F598E0080E02A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336890442A3F598E0080E02A /* MainViewModel.swift */; };
+		33BD8CAD2B1CA7D100612B1D /* ScanButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8CAC2B1CA7D100612B1D /* ScanButtonView.swift */; };
+		33BD8CAF2B1DC9E300612B1D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8CAE2B1DC9E300612B1D /* Product.swift */; };
+		33BD8CB12B1DC9ED00612B1D /* Pricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD8CB02B1DC9ED00612B1D /* Pricing.swift */; };
 		33E45D292B08B55E003A335D /* Model.docc in Sources */ = {isa = PBXBuildFile; fileRef = 33E45D282B08B55E003A335D /* Model.docc */; };
 		33E45D2A2B08B55E003A335D /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E45D272B08B55E003A335D /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33E45D2D2B08B55E003A335D /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E45D252B08B55E003A335D /* Model.framework */; };
@@ -64,6 +67,9 @@
 		3368903D2A3F55E50080E02A /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
 		3368903F2A3F57BF0080E02A /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		336890442A3F598E0080E02A /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		33BD8CAC2B1CA7D100612B1D /* ScanButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanButtonView.swift; sourceTree = "<group>"; };
+		33BD8CAE2B1DC9E300612B1D /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		33BD8CB02B1DC9ED00612B1D /* Pricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pricing.swift; sourceTree = "<group>"; };
 		33E45D252B08B55E003A335D /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33E45D272B08B55E003A335D /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		33E45D282B08B55E003A335D /* Model.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Model.docc; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 				336890262A3F3A210080E02A /* SceneDelegate.swift */,
 				3368903F2A3F57BF0080E02A /* MainCoordinator.swift */,
 				3368903B2A3F54B30080E02A /* BaseViewController.swift */,
+				33BD8CB22B1DC9F200612B1D /* entities */,
 				336890432A3F597D0080E02A /* Main */,
 				3368903A2A3F54400080E02A /* BarcodeScanner */,
 				3368902D2A3F3A230080E02A /* Assets.xcassets */,
@@ -141,11 +148,21 @@
 			children = (
 				336890442A3F598E0080E02A /* MainViewModel.swift */,
 				33E595E52A478B76001FED1F /* MainView.swift */,
+				33BD8CAC2B1CA7D100612B1D /* ScanButtonView.swift */,
 				33FE00982B1A5D5600CC4441 /* ProductNameInputView.swift */,
 				33FE009C2B1A647500CC4441 /* PriceInputView.swift */,
 				33FE009A2B1A613D00CC4441 /* PriceListView.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		33BD8CB22B1DC9F200612B1D /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				33BD8CB02B1DC9ED00612B1D /* Pricing.swift */,
+				33BD8CAE2B1DC9E300612B1D /* Product.swift */,
+			);
+			path = entities;
 			sourceTree = "<group>";
 		};
 		33E45D262B08B55E003A335D /* Model */ = {
@@ -272,8 +289,10 @@
 				33FE009B2B1A613D00CC4441 /* PriceListView.swift in Sources */,
 				33FE009D2B1A647500CC4441 /* PriceInputView.swift in Sources */,
 				3368903E2A3F55E50080E02A /* BarcodeScannerView.swift in Sources */,
+				33BD8CAD2B1CA7D100612B1D /* ScanButtonView.swift in Sources */,
 				336890402A3F57BF0080E02A /* MainCoordinator.swift in Sources */,
 				33FE00992B1A5D5600CC4441 /* ProductNameInputView.swift in Sources */,
+				33BD8CB12B1DC9ED00612B1D /* Pricing.swift in Sources */,
 				3368903C2A3F54B30080E02A /* BaseViewController.swift in Sources */,
 				336890292A3F3A210080E02A /* BarcodeScannerViewController.swift in Sources */,
 				336890252A3F3A210080E02A /* AppDelegate.swift in Sources */,
@@ -281,6 +300,7 @@
 				336890272A3F3A210080E02A /* SceneDelegate.swift in Sources */,
 				336890452A3F598E0080E02A /* MainViewModel.swift in Sources */,
 				33E595E62A478B76001FED1F /* MainView.swift in Sources */,
+				33BD8CAF2B1DC9E300612B1D /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,8 +462,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -472,8 +491,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -28,45 +28,12 @@ struct MainView: View {
     var body: some View {
         VStack(spacing: 16) {
             ProductNameInputView(info: info, product: product, newName: $newName)
-            
-            var mainButtonEnabled : Bool {
-                switch info {
-                case .new:
-                    return newName != "" && newPrice != ""
-                default:
-                    return true
-                }
-            }
-            
-            Button(action: {
-                switch info {
-                case .idle, .found:
-                    viewModel.scanButtonTapSubject.send()
-                case let .new(barcode):
-                    let newProduct = Product(barcode: barcode, name: newName)
-                    newProduct.pricing.append(.init(date: .now, price: newPrice))
-                    viewModel.newProductTapSubject.send(newProduct)
-                    newName = ""
-                    newPrice = ""
-                }
-            }) {
-                var text: String {
-                    switch info {
-                    case .idle, .found:
-                        return "Сканувати"
-                    case .new:
-                        return "Добавить"
-                    }
-                }
-                
-                Text(text)
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 55)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(4)
-            }
-            .disabled(!mainButtonEnabled)
-            .padding(.top, 16)
+
+            ScanButtonView(info: info, product: product, newName: $newName, newPrice: $newPrice, scanButtonTap: {
+                viewModel.scanButtonTapSubject.send()
+            }, newProductButtonTap: { newProduct in
+                viewModel.newProductTapSubject.send(newProduct)
+            })
             
             PriceInputView(info: info, product: product, newPrice: $newPrice) { [weak viewModel] price in
                 viewModel?.newPriceTapSubject.send(price)
