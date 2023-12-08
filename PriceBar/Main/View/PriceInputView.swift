@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Utils
 
 struct PriceInputView: View {
     
@@ -37,7 +38,7 @@ struct PriceInputView: View {
                     }
                     
                     Button {
-                        let price = Pricing(date: .now, price: newPrice)
+                        let price = Pricing(date: .now, price: newPrice.double)
                         price.product = product
                         newPriceTapSubject(price)
                         newPrice = ""

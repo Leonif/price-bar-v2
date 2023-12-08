@@ -8,6 +8,7 @@
 import Combine
 import SwiftUI
 import SwiftData
+import Utils
 
 @Observable
 final class MainViewModel: ObservableObject {
@@ -25,16 +26,29 @@ final class MainViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    var fixArray: [Product] = [
-        .init(barcode: "9786178120924", name: "Метью Перрі. Друзі, коханки і велика халепа"),
-        .init(barcode: "9786176796541", name: "Бодо Шефер. Шлях до фінансової свободи")
-    ]
+    var cloudProducts: [CloudProduct] = []
+    var cloudPricings: [CloudPricing] = []
     
     
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
         setupBinding()
+        loadDefaultData()
     }
+    
+    private func loadDefaultData() {
+        let productsData = readJsonFile(name: "products")!
+        let pricingData = readJsonFile(name: "pricing")!
+        do {
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+            cloudPricings = try decoder.decode([CloudPricing].self, from: pricingData)
+            cloudProducts = try decoder.decode([CloudProduct].self, from: productsData)
+        } catch let error {
+            debugPrint(error)
+        }
+    }
+    
     
     func loadData() {
         do {
@@ -44,34 +58,54 @@ final class MainViewModel: ObservableObject {
             products = try modelContext.fetch(fetchProductDescriptor)
             pricing = try modelContext.fetch(fetchPricingDescriptor)
             
+            addDefaultProducts()
+            
             cleanIfNeed()
-            fixProductsIfNeed()
-            printPricing()
+            printNewComers()
+//            printPricing()
             
         } catch let error {
             debugPrint(error)
         }
     }
     
+    private func addDefaultProducts() {
+        for cpd in cloudProducts {
+            if let index = products.firstIndex(where: { $0.barcode == cpd.barcode }) {
+                products[index].name = cpd.name // name corrections
+            } else {
+                let candidate = Product(barcode: cpd.barcode, name: cpd.name)
+                modelContext.insert(candidate)
+            }
+        }
+        
+        saveModel()
+    }
+    
     private func printPricing() {
-        pricing.forEach { pricing in
-            guard let product = pricing.product else { return }
-            debugPrint("\(pricing.date) barcode: \(product.barcode) name: \(product.name) price: \(pricing.price)")
+//        pricing.forEach { pricing in
+//            guard let product = pricing.product else { return }
+//            debugPrint("\(pricing.date) barcode: \(product.barcode) name: \(product.name) price: \(pricing.price)")
+//        }
+        
+        products.forEach { pr in
+            debugPrint("barcode: \(pr.barcode) name: \(pr.name)")
+        }
+    }
+    
+    private func printNewComers() {
+        debugPrint("==== New comers =====")
+        for cpd in products {
+            if !cloudProducts.contains(where: { $0.barcode == cpd.barcode }) {
+                debugPrint(cpd.barcode, cpd.name)
+            }
         }
     }
     
     private func cleanIfNeed() {
         pricing.forEach { pricing in
-            if pricing.price.isEmpty {
+            if pricing.price <= 0 {
                 modelContext.delete(pricing)
-            }
-        }
-    }
-    
-    private func fixProductsIfNeed() {
-        for (index, product) in products.enumerated() {
-            if let pr = fixArray.first(where: { $0.barcode == product.barcode }) {
-                products[index].name = pr.name
             }
         }
     }
@@ -101,16 +135,20 @@ final class MainViewModel: ObservableObject {
         newPriceTapSubject.sink { [weak self] pricing in
             guard let self else { return }
             modelContext.insert(pricing)
-            do {
-                try modelContext.save()
-            } catch let error {
-                debugPrint(error)
-            }
+            saveModel()
             loadData()
             if let product = pricing.product {
                 self.resultBarcodeScanning.send(.found(product))
             }
         }.store(in: &cancellables)
+    }
+    
+    private func saveModel() {
+        do {
+            try modelContext.save()
+        } catch let error {
+            debugPrint(error)
+        }
     }
 }
 

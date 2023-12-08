@@ -6,9 +6,7 @@
 //
 
 import SwiftUI
-
-
-
+import Utils
 
 struct PriceListView: View {
     
@@ -37,7 +35,7 @@ struct PriceListView: View {
                             .multilineTextAlignment(.center)
                             .foregroundColor(.black)
                         
-                        Text(pricing.price)
+                        Text(pricing.price.string)
                             .font(.system(size: 14, weight: .bold))
                             .multilineTextAlignment(.center)
                             .foregroundColor(.green)

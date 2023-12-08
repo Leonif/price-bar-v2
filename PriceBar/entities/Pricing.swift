@@ -7,16 +7,23 @@
 import SwiftData
 import Foundation
 
+struct CloudPricing: Decodable {
+    let date: Date
+    let barcode: String
+    let price: Double
+}
+
+
 @Model
 class Pricing {
     let id = UUID().uuidString
     let date: Date
-    let price: String
+    let price: Double
     
-    static let empty = Pricing(date: Date(), price: "...")
+    static let empty = Pricing(date: Date(), price: 0)
     
     @Relationship var product: Product?
-    init(date: Date, price: String) {
+    init(date: Date, price: Double) {
         self.date = date
         self.price = price
         self.product = nil

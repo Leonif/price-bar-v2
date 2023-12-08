@@ -21,3 +21,9 @@ class Product {
         self.pricing = []
     }
 }
+
+
+struct CloudProduct: Decodable {
+    let barcode: String
+    let name: String
+}

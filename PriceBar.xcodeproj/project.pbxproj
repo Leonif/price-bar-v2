@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		335B05D72B225F4D0066895B /* pricing.json in Resources */ = {isa = PBXBuildFile; fileRef = 335B05D62B225F4D0066895B /* pricing.json */; };
+		335B05D92B22618D0066895B /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = 335B05D82B22618D0066895B /* products.json */; };
+		335B05E22B2317F70066895B /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 335B05E12B2317F70066895B /* Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		335B05E52B2317F70066895B /* Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335B05DF2B2317F70066895B /* Utils.framework */; };
+		335B05E62B2317F70066895B /* Utils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 335B05DF2B2317F70066895B /* Utils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		335B05EB2B23180F0066895B /* input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B05EA2B23180F0066895B /* input.swift */; };
 		336890252A3F3A210080E02A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336890242A3F3A210080E02A /* AppDelegate.swift */; };
 		336890272A3F3A210080E02A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336890262A3F3A210080E02A /* SceneDelegate.swift */; };
 		336890292A3F3A210080E02A /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336890282A3F3A210080E02A /* BarcodeScannerViewController.swift */; };
@@ -31,6 +37,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		335B05E32B2317F70066895B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 336890192A3F3A210080E02A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 335B05DE2B2317F70066895B;
+			remoteInfo = Utils;
+		};
 		33E45D2B2B08B55E003A335D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 336890192A3F3A210080E02A /* Project object */;
@@ -47,6 +60,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				335B05E62B2317F70066895B /* Utils.framework in Embed Frameworks */,
 				33E45D2E2B08B55E003A335D /* Model.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -55,6 +69,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		335B05D62B225F4D0066895B /* pricing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pricing.json; sourceTree = "<group>"; };
+		335B05D82B22618D0066895B /* products.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
+		335B05DF2B2317F70066895B /* Utils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Utils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		335B05E12B2317F70066895B /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		335B05EA2B23180F0066895B /* input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = input.swift; sourceTree = "<group>"; };
 		336890212A3F3A210080E02A /* PriceBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PriceBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		336890242A3F3A210080E02A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		336890262A3F3A210080E02A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,10 +99,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		335B05DC2B2317F70066895B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3368901E2A3F3A210080E02A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335B05E52B2317F70066895B /* Utils.framework in Frameworks */,
 				33E45D2D2B08B55E003A335D /* Model.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,11 +125,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		335B05E02B2317F70066895B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				335B05E12B2317F70066895B /* Utils.h */,
+				335B05EA2B23180F0066895B /* input.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		335B05EC2B23184F0066895B /* defaultData */ = {
+			isa = PBXGroup;
+			children = (
+				335B05D62B225F4D0066895B /* pricing.json */,
+				335B05D82B22618D0066895B /* products.json */,
+			);
+			path = defaultData;
+			sourceTree = "<group>";
+		};
+		335B05ED2B23186E0066895B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				33E595E52A478B76001FED1F /* MainView.swift */,
+				33BD8CAC2B1CA7D100612B1D /* ScanButtonView.swift */,
+				33FE00982B1A5D5600CC4441 /* ProductNameInputView.swift */,
+				33FE009C2B1A647500CC4441 /* PriceInputView.swift */,
+				33FE009A2B1A613D00CC4441 /* PriceListView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		335B05EE2B2318760066895B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				336890442A3F598E0080E02A /* MainViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		336890182A3F3A210080E02A = {
 			isa = PBXGroup;
 			children = (
 				336890232A3F3A210080E02A /* PriceBar */,
 				33E45D262B08B55E003A335D /* Model */,
+				335B05E02B2317F70066895B /* Utils */,
 				336890222A3F3A210080E02A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +178,7 @@
 			children = (
 				336890212A3F3A210080E02A /* PriceBar.app */,
 				33E45D252B08B55E003A335D /* Model.framework */,
+				335B05DF2B2317F70066895B /* Utils.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,6 +190,7 @@
 				336890262A3F3A210080E02A /* SceneDelegate.swift */,
 				3368903F2A3F57BF0080E02A /* MainCoordinator.swift */,
 				3368903B2A3F54B30080E02A /* BaseViewController.swift */,
+				335B05EC2B23184F0066895B /* defaultData */,
 				33BD8CB22B1DC9F200612B1D /* entities */,
 				336890432A3F597D0080E02A /* Main */,
 				3368903A2A3F54400080E02A /* BarcodeScanner */,
@@ -146,12 +214,8 @@
 		336890432A3F597D0080E02A /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				336890442A3F598E0080E02A /* MainViewModel.swift */,
-				33E595E52A478B76001FED1F /* MainView.swift */,
-				33BD8CAC2B1CA7D100612B1D /* ScanButtonView.swift */,
-				33FE00982B1A5D5600CC4441 /* ProductNameInputView.swift */,
-				33FE009C2B1A647500CC4441 /* PriceInputView.swift */,
-				33FE009A2B1A613D00CC4441 /* PriceListView.swift */,
+				335B05EE2B2318760066895B /* Model */,
+				335B05ED2B23186E0066895B /* View */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -177,6 +241,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		335B05DA2B2317F70066895B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				335B05E22B2317F70066895B /* Utils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		33E45D202B08B55E003A335D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -188,6 +260,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		335B05DE2B2317F70066895B /* Utils */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 335B05E72B2317F70066895B /* Build configuration list for PBXNativeTarget "Utils" */;
+			buildPhases = (
+				335B05DA2B2317F70066895B /* Headers */,
+				335B05DB2B2317F70066895B /* Sources */,
+				335B05DC2B2317F70066895B /* Frameworks */,
+				335B05DD2B2317F70066895B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Utils;
+			productName = Utils;
+			productReference = 335B05DF2B2317F70066895B /* Utils.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		336890202A3F3A210080E02A /* PriceBar */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 336890352A3F3A230080E02A /* Build configuration list for PBXNativeTarget "PriceBar" */;
@@ -201,6 +291,7 @@
 			);
 			dependencies = (
 				33E45D2C2B08B55E003A335D /* PBXTargetDependency */,
+				335B05E42B2317F70066895B /* PBXTargetDependency */,
 			);
 			name = PriceBar;
 			productName = PriceBar;
@@ -235,6 +326,10 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					335B05DE2B2317F70066895B = {
+						CreatedOnToolsVersion = 15.0.1;
+						LastSwiftMigration = 1500;
+					};
 					336890202A3F3A210080E02A = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -258,16 +353,26 @@
 			targets = (
 				336890202A3F3A210080E02A /* PriceBar */,
 				33E45D242B08B55E003A335D /* Model */,
+				335B05DE2B2317F70066895B /* Utils */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		335B05DD2B2317F70066895B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3368901F2A3F3A210080E02A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				336890312A3F3A230080E02A /* LaunchScreen.storyboard in Resources */,
+				335B05D92B22618D0066895B /* products.json in Resources */,
+				335B05D72B225F4D0066895B /* pricing.json in Resources */,
 				3368902E2A3F3A230080E02A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +387,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		335B05DB2B2317F70066895B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				335B05EB2B23180F0066895B /* input.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3368901D2A3F3A210080E02A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -315,6 +428,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		335B05E42B2317F70066895B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 335B05DE2B2317F70066895B /* Utils */;
+			targetProxy = 335B05E32B2317F70066895B /* PBXContainerItemProxy */;
+		};
 		33E45D2C2B08B55E003A335D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 33E45D242B08B55E003A335D /* Model */;
@@ -334,6 +452,86 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		335B05E82B2317F70066895B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = JFBC3P353F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lion.Utils;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		335B05E92B2317F70066895B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = JFBC3P353F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lion.Utils;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		336890332A3F3A230080E02A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -451,6 +649,7 @@
 		336890362A3F3A230080E02A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -480,6 +679,7 @@
 		336890372A3F3A230080E02A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -586,6 +786,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		335B05E72B2317F70066895B /* Build configuration list for PBXNativeTarget "Utils" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				335B05E82B2317F70066895B /* Debug */,
+				335B05E92B2317F70066895B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3368901C2A3F3A210080E02A /* Build configuration list for PBXProject "PriceBar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

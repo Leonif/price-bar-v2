@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Utils
 
 struct ScanButtonView: View {
     
@@ -43,7 +44,7 @@ struct ScanButtonView: View {
                 scanButtonTap()
             case let .new(barcode):
                 let newProduct = Product(barcode: barcode, name: newName)
-                newProduct.pricing.append(.init(date: .now, price: newPrice))
+                newProduct.pricing.append(.init(date: .now, price: newPrice.double))
                 newProductButtonTap(newProduct)
                 
                 newName = ""
