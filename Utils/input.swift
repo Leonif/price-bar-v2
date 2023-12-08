@@ -5,6 +5,8 @@
 //  Created by LEONID NIFANTIJEV on 08.12.2023.
 //
 
+import SwiftData
+
 public extension DateFormatter {
     static let iso8601Full: DateFormatter = {
         let formatter = DateFormatter()
@@ -27,6 +29,20 @@ public func readJsonFile(name: String, from bundle: Bundle = .main) -> Data? {
     catch {
         print(error)
         return nil
+    }
+}
+
+
+public extension ModelContext {
+    
+    func readFromDb<T: PersistentModel>() -> [T] {
+        do {
+            let fetchProductDescriptor = FetchDescriptor<T>()
+            return try self.fetch(fetchProductDescriptor)
+        } catch let error {
+            debugPrint(error)
+            return []
+        }
     }
 }
 

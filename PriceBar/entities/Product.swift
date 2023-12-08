@@ -19,6 +19,10 @@ class Product {
         self.barcode = barcode
         self.name = name
         self.pricing = []
+    func pricePrint() {
+        pricings.forEach { pricing in
+            print("\(barcode): price \(pricing.price)")
+        }
     }
 }
 
