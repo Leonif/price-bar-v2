@@ -14,9 +14,9 @@ struct PriceInputView: View {
     private let product: Product?
     @Binding private var newPrice: String
     
-    var newPriceTapSubject: ((Pricing) -> Void)
+    var newPriceTapSubject: ((Double) -> Void)
     
-    init(info: MainViewModel.ScannedInfo, product: Product?, newPrice: Binding<String>, newPriceTapSubject: @escaping ((Pricing) -> Void)) {
+    init(info: MainViewModel.ScannedInfo, product: Product?, newPrice: Binding<String>, newPriceTapSubject: @escaping ((Double) -> Void)) {
         self.info = info
         self.product = product
         _newPrice = newPrice
@@ -38,9 +38,7 @@ struct PriceInputView: View {
                     }
                     
                     Button {
-                        let price = Pricing(date: .now, price: newPrice.double)
-                        price.product = product
-                        newPriceTapSubject(price)
+                        newPriceTapSubject(newPrice.double)
                         newPrice = ""
                         hideKeyboard()
                     } label: {

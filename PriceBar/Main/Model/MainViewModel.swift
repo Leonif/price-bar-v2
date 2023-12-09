@@ -16,11 +16,13 @@ final class MainViewModel: ObservableObject {
     var products: [Product] = []
     var pricing: [Pricing] = []
     
+    var currentProduct: Product?
+    
     let modelContext: ModelContext
     
     var scanButtonTapSubject = PassthroughSubject<Void, Never>()
     var newProductTapSubject = PassthroughSubject<Product, Never>()
-    var newPriceTapSubject = PassthroughSubject<Pricing, Never>()
+    var newPriceTapSubject = PassthroughSubject<Double, Never>()
     var barcodeScannedSubject = PassthroughSubject<String, Never>()
     var resultBarcodeScanning = PassthroughSubject<ScannedInfo, Never>()
     
@@ -51,22 +53,14 @@ final class MainViewModel: ObservableObject {
     
     
     func loadData() {
-        do {
-            let fetchProductDescriptor = FetchDescriptor<Product>()
-            let fetchPricingDescriptor = FetchDescriptor<Pricing>()
-            
-            products = try modelContext.fetch(fetchProductDescriptor)
-            pricing = try modelContext.fetch(fetchPricingDescriptor)
-            
-            addDefaultProducts()
-            
-            cleanIfNeed()
-            printNewComers()
-//            printPricing()
-            
-        } catch let error {
-            debugPrint(error)
-        }
+        products = modelContext.readFromDb()
+        pricing = modelContext.readFromDb()
+        
+        addDefaultProducts()
+        addDefaultPrices()
+        
+        cleanIfNeed()
+        printNewComers()
     }
     
     private func addDefaultProducts() {
@@ -78,26 +72,39 @@ final class MainViewModel: ObservableObject {
                 modelContext.insert(candidate)
             }
         }
-        
         saveModel()
     }
     
-    private func printPricing() {
-//        pricing.forEach { pricing in
-//            guard let product = pricing.product else { return }
-//            debugPrint("\(pricing.date) barcode: \(product.barcode) name: \(product.name) price: \(pricing.price)")
-//        }
-        
-        products.forEach { pr in
-            debugPrint("barcode: \(pr.barcode) name: \(pr.name)")
+    private func addDefaultPrices() {
+        for index in products.indices {
+            // add default prices
+            let defaultPrices = cloudPricings.filter { $0.barcode == products[index].barcode }
+            let dbPrices = products[index].pricings
+            
+            for priceItem in defaultPrices {
+                if !dbPrices.contains(where: { $0.date == priceItem.date }) {
+                    let candidate = Pricing(date: priceItem.date, price: priceItem.price)
+                    candidate.product = products[index]
+                    modelContext.insert(candidate)
+                }
+            }
         }
+        saveModel()
     }
     
     private func printNewComers() {
-        debugPrint("==== New comers =====")
         for cpd in products {
             if !cloudProducts.contains(where: { $0.barcode == cpd.barcode }) {
-                debugPrint(cpd.barcode, cpd.name)
+                debugPrint("==== New product comers ===== \(cpd.barcode), \(cpd.name)")
+            }
+        }
+        
+        
+        for cps in pricing {
+            if !cloudPricings.contains(where: { $0.price == cps.price  }) {
+                cps.product.map { product in
+                    debugPrint("==== New price comers ===== \(product.barcode), \(product.name) \(cps.date) \(cps.price)")
+                }
             }
         }
     }
@@ -114,6 +121,7 @@ final class MainViewModel: ObservableObject {
         barcodeScannedSubject.sink { [weak self] barcode in
             guard let self else { return }
             if let product = products.first(where: { $0.barcode == barcode }) {
+                currentProduct = product
                 self.resultBarcodeScanning.send(.found(product))
             } else {
                 self.resultBarcodeScanning.send(.new(barcode: barcode))
@@ -132,20 +140,32 @@ final class MainViewModel: ObservableObject {
             self.resultBarcodeScanning.send(.found(newProduct))
         }.store(in: &cancellables)
         
-        newPriceTapSubject.sink { [weak self] pricing in
+        newPriceTapSubject.sink { [weak self] price in
             guard let self else { return }
+            
+            let pricing = Pricing(date: .now, price: price)
+            pricing.product = currentProduct
+            
             modelContext.insert(pricing)
             saveModel()
-            loadData()
-            if let product = pricing.product {
+            
+            if let product = self.products.first(where: { $0.barcode == self.currentProduct?.barcode }) {
+                
+                product.pricePrint()
+                
+                
+                self.currentProduct = product
                 self.resultBarcodeScanning.send(.found(product))
             }
+            
         }.store(in: &cancellables)
     }
     
     private func saveModel() {
         do {
             try modelContext.save()
+            products = modelContext.readFromDb()
+            pricing = modelContext.readFromDb()
         } catch let error {
             debugPrint(error)
         }
