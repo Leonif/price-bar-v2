@@ -49,7 +49,7 @@ struct ScanButtonView: View {
             
             Text(text)
                 .frame(width: UIScreen.main.bounds.width - 32, height: 55)
-                .background(Color.blue)
+                .background(mainButtonEnabled ? Color.blue : Color(UIColor(.blue).withAlphaComponent(0.3)))
                 .foregroundColor(.white)
                 .cornerRadius(4)
         }

@@ -38,7 +38,7 @@ struct PriceInputView: View {
                     } label: {
                         Text("+")
                             .frame(width: 40, height: 40)
-                            .background(Color.green)
+                            .background(priceButtonEnabled ? Color.green : Color(UIColor(.green).withAlphaComponent(0.3)))
                             .foregroundColor(.white)
                             .cornerRadius(4)
                     }.disabled(!priceButtonEnabled)
