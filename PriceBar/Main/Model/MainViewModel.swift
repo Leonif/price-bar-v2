@@ -98,8 +98,8 @@ final class MainViewModel: ObservableObject {
             if !cloudProducts.contains(where: { $0.barcode == cpd.barcode }) {
                 print("""
                 {
-                  "barcode": \(cpd.barcode),
-                  "name": \(cpd.name)
+                  "barcode": \"\(cpd.barcode)\",
+                  "name": \"\(cpd.name)\"
                 },
                 """)
             }
@@ -111,10 +111,10 @@ final class MainViewModel: ObservableObject {
                 cps.product.map { product in
                     print("""
                           {
-                            "date": \(cps.date),
-                            "barcode": \(product.barcode),
+                            "date": \"\(cps.date)\",
+                            "barcode": \"\(product.barcode)\",
                             "price": \(cps.price)
-                          }
+                          },
                     """)
                 }
             }
