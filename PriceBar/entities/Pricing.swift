@@ -8,9 +8,18 @@ import SwiftData
 import Foundation
 
 struct CloudPricing: Decodable {
+    
+    let id = UUID().uuidString
+    
     let date: Date
     let barcode: String
     let price: Double
+    
+    enum CodingKeys: CodingKey {
+        case date
+        case barcode
+        case price
+    }
 }
 
 

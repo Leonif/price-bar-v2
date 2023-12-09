@@ -14,11 +14,13 @@ class Product {
     
     static let empty = Product(barcode: "...", name: "...")
     
-    @Relationship var pricing: [Pricing]
+    @Relationship var pricings: [Pricing]
     init(barcode: String, name: String) {
         self.barcode = barcode
         self.name = name
-        self.pricing = []
+        self.pricings = []
+    }
+    
     func pricePrint() {
         pricings.forEach { pricing in
             print("\(barcode): price \(pricing.price)")
@@ -30,4 +32,6 @@ class Product {
 struct CloudProduct: Decodable {
     let barcode: String
     let name: String
+    
+    static let empty = CloudProduct(barcode: "...", name: "...")
 }
