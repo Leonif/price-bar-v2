@@ -93,17 +93,29 @@ final class MainViewModel: ObservableObject {
     }
     
     private func printNewComers() {
+        debugPrint("==== New product comers =====")
         for cpd in products {
             if !cloudProducts.contains(where: { $0.barcode == cpd.barcode }) {
-                debugPrint("==== New product comers ===== \(cpd.barcode), \(cpd.name)")
+                print("""
+                {
+                  "barcode": \(cpd.barcode),
+                  "name": \(cpd.name)
+                },
+                """)
             }
         }
         
-        
+        debugPrint("==== New price comers ===== ")
         for cps in pricing {
             if !cloudPricings.contains(where: { $0.price == cps.price  }) {
                 cps.product.map { product in
-                    debugPrint("==== New price comers ===== \(product.barcode), \(product.name) \(cps.date) \(cps.price)")
+                    print("""
+                          {
+                            "date": \(cps.date),
+                            "barcode": \(product.barcode),
+                            "price": \(cps.price)
+                          }
+                    """)
                 }
             }
         }
@@ -124,6 +136,7 @@ final class MainViewModel: ObservableObject {
                 currentProduct = product
                 self.resultBarcodeScanning.send(.found(product))
             } else {
+                currentProduct = nil
                 self.resultBarcodeScanning.send(.new(barcode: barcode))
             }
         }.store(in: &cancellables)
@@ -131,6 +144,7 @@ final class MainViewModel: ObservableObject {
         newProductTapSubject.sink { [weak self] newProduct in
             guard let self else { return }
             modelContext.insert(newProduct)
+            currentProduct = newProduct
             do {
                 try modelContext.save()
             } catch let error {
@@ -150,10 +164,7 @@ final class MainViewModel: ObservableObject {
             saveModel()
             
             if let product = self.products.first(where: { $0.barcode == self.currentProduct?.barcode }) {
-                
                 product.pricePrint()
-                
-                
                 self.currentProduct = product
                 self.resultBarcodeScanning.send(.found(product))
             }

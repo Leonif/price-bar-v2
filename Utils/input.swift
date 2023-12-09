@@ -59,7 +59,14 @@ public extension Double {
 
 public extension String {
     var double: Double {
-        return (self as NSString).doubleValue
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale.current
+        if let value = numberFormatter.number(from: self)?.doubleValue {
+            return value
+        } else {
+            assertionFailure("Impossible to convert string \(self) to double")
+            return 0
+        }
     }
     
     var int: Int {

@@ -10,21 +10,14 @@ import Utils
 
 struct PriceInputView: View {
     
-    private let info: MainViewModel.ScannedInfo
-    private let product: Product?
-    @Binding private var newPrice: String
+    @Binding var newPrice: String
+
+    let info: MainViewModel.ScannedInfo
+    let product: CloudProduct
     
     var newPriceTapSubject: ((Double) -> Void)
     
-    init(info: MainViewModel.ScannedInfo, product: Product?, newPrice: Binding<String>, newPriceTapSubject: @escaping ((Double) -> Void)) {
-        self.info = info
-        self.product = product
-        _newPrice = newPrice
-        self.newPriceTapSubject = newPriceTapSubject
-    }
-    
     var body: some View {
-        if product != nil {
             HStack {
                 TextField("Введите цену", text: $newPrice)
                     .font(.system(size: 30, weight: .bold))
@@ -38,6 +31,7 @@ struct PriceInputView: View {
                     }
                     
                     Button {
+                        debugPrint("\(newPrice) \(newPrice.double)")
                         newPriceTapSubject(newPrice.double)
                         newPrice = ""
                         hideKeyboard()
@@ -50,6 +44,6 @@ struct PriceInputView: View {
                     }.disabled(!priceButtonEnabled)
                 }
             }
-        }
+        
     }
 }

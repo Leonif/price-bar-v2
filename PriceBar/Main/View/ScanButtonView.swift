@@ -11,28 +11,18 @@ import Utils
 struct ScanButtonView: View {
     
     @Binding var newName: String
-    @Binding var newPrice: String
+
+    let info: MainViewModel.ScannedInfo
+    let product: CloudProduct
     
     var scanButtonTap: (() -> Void)
-    var newProductButtonTap: ((Product) -> Void)
-    
-    private let info: MainViewModel.ScannedInfo
-    private let product: Product?
-    
-    init(info: MainViewModel.ScannedInfo, product: Product?, newName: Binding<String>, newPrice: Binding<String>, scanButtonTap:  @escaping (() -> Void), newProductButtonTap: @escaping ((Product) -> Void)) {
-        self.info = info
-        self.product = product
-        _newName = newName
-        _newPrice = newPrice
-        self.scanButtonTap = scanButtonTap
-        self.newProductButtonTap = newProductButtonTap
-    }
+    var newProductButtonTap: ((CloudProduct) -> Void)
     
     var body: some View {
         var mainButtonEnabled : Bool {
             switch info {
             case .new:
-                return newName != "" && newPrice != ""
+                return newName != ""
             default:
                 return true
             }
@@ -43,12 +33,9 @@ struct ScanButtonView: View {
             case .idle, .found:
                 scanButtonTap()
             case let .new(barcode):
-                let newProduct = Product(barcode: barcode, name: newName)
-                newProduct.pricings.append(.init(date: .now, price: newPrice.double))
+                let newProduct = CloudProduct(barcode: barcode, name: newName)
                 newProductButtonTap(newProduct)
-                
                 newName = ""
-                newPrice = ""
             }
         }) {
             var text: String {

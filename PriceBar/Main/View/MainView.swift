@@ -29,19 +29,24 @@ struct MainView: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            ProductNameInputView(info: info, product: viewModel.currentProduct, newName: $newName)
+            ProductNameInputView(newName: $newName, info: info, product: product)
 
-            ScanButtonView(info: info, product: viewModel.currentProduct, newName: $newName, newPrice: $newPrice, scanButtonTap: {
+            ScanButtonView(newName: $newName, info: info, product: product, scanButtonTap: {
                 viewModel.scanButtonTapSubject.send()
             }, newProductButtonTap: { newProduct in
-                viewModel.newProductTapSubject.send(newProduct)
+                
+                let product = Product(barcode: newProduct.barcode, name: newProduct.name)
+                
+                viewModel.newProductTapSubject.send(product)
+                viewModel.newPriceTapSubject.send(newPrice.double)
             })
             
-            PriceInputView(info: info, product: viewModel.currentProduct, newPrice: $newPrice) { price in
-                viewModel.newPriceTapSubject.send(price)
+            if product.barcode != "..." {
+                PriceInputView(newPrice:  $newPrice, info: info, product: product) { price in
+                    viewModel.newPriceTapSubject.send(price)
+                }
+                PriceListView(pricings: pricings)
             }
-            
-            PriceListView(pricings: pricings)
         }
         .padding(16)
         .background(Color.white)
@@ -56,8 +61,10 @@ struct MainView: View {
             case let .found(product):
                 self.product = .init(barcode: product.barcode, name: product.name)
                 self.pricings = product.pricings.map { CloudPricing(date: $0.date, barcode: product.barcode, price: $0.price)}
-            case .new:
-                break
+                self.newPrice = ""
+            case let .new(barcode):
+                self.product = .init(barcode: barcode, name: "")
+                self.pricings = []
             }
         }
         .onReceive(viewModel.scanButtonTapSubject) { _ in  }

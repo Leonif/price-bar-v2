@@ -10,24 +10,18 @@ import SwiftUI
 struct ProductNameInputView: View {
     
     @Binding var newName: String
-    private let info: MainViewModel.ScannedInfo
-    private let product: Product?
-    
-    init(info: MainViewModel.ScannedInfo, product: Product?, newName: Binding<String>) {
-        self.info = info
-        self.product = product
-        _newName = newName
-    }
+    let info: MainViewModel.ScannedInfo
+    let product: CloudProduct
     
     var body: some View {
-        Text(product?.barcode ?? "...")
+        Text(product.barcode)
             .font(.system(size: 16, weight: .light))
             .multilineTextAlignment(.center)
             .foregroundColor(.black)
         
         switch info {
         case .idle, .found:
-            Text(product?.name ?? "...")
+            Text(product.name)
                 .font(.system(size: 25, weight: .semibold))
                 .multilineTextAlignment(.center)
                 .foregroundColor(.black)
