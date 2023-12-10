@@ -47,9 +47,19 @@ struct ScanButtonView: View {
                 }
             }
             
+            var color: Color {
+                switch info {
+                case .idle, .found:
+                    return mainButtonEnabled ? Color.blue : Color(UIColor(.blue).withAlphaComponent(0.3))
+                case .new:
+                    return mainButtonEnabled ? Color.green : Color(UIColor(.green).withAlphaComponent(0.3))
+                }
+            }
+            
+            
             Text(text)
                 .frame(width: UIScreen.main.bounds.width - 32, height: 55)
-                .background(mainButtonEnabled ? Color.blue : Color(UIColor(.blue).withAlphaComponent(0.3)))
+                .background(color)
                 .foregroundColor(.white)
                 .cornerRadius(4)
         }
