@@ -22,7 +22,7 @@ final class MainViewModel: ObservableObject {
     
     var scanButtonTapSubject = PassthroughSubject<Void, Never>()
     var newProductTapSubject = PassthroughSubject<Product, Never>()
-    var newPriceTapSubject = PassthroughSubject<Double, Never>()
+    var newPriceTapSubject = PassthroughSubject<(Double, String), Never>()
     var barcodeScannedSubject = PassthroughSubject<String, Never>()
     var resultBarcodeScanning = PassthroughSubject<ScannedInfo, Never>()
     
@@ -83,7 +83,7 @@ final class MainViewModel: ObservableObject {
             
             for priceItem in defaultPrices {
                 if !dbPrices.contains(where: { $0.date == priceItem.date }) {
-                    let candidate = Pricing(date: priceItem.date, price: priceItem.price)
+                    let candidate = Pricing(date: priceItem.date, price: priceItem.price, comment: priceItem.comment)
                     candidate.product = products[index]
                     modelContext.insert(candidate)
                 }
@@ -107,13 +107,14 @@ final class MainViewModel: ObservableObject {
         
         debugPrint("==== New price comers ===== ")
         for cps in pricing {
-            if !cloudPricings.contains(where: { $0.price == cps.price  }) {
+            if !cloudPricings.contains(where: { $0.price == cps.price && $0.barcode == cps.product?.barcode }) {
                 cps.product.map { product in
                     print("""
                           {
                             "date": \"\(cps.date)\",
                             "barcode": \"\(product.barcode)\",
-                            "price": \(cps.price)
+                            "price": \(cps.price),
+                            "comment": \"\(cps.comment ?? "")\"
                           },
                     """)
                 }
@@ -154,10 +155,10 @@ final class MainViewModel: ObservableObject {
             self.resultBarcodeScanning.send(.found(newProduct))
         }.store(in: &cancellables)
         
-        newPriceTapSubject.sink { [weak self] price in
+        newPriceTapSubject.sink { [weak self] (price, comment) in
             guard let self else { return }
             
-            let pricing = Pricing(date: .now, price: price)
+            let pricing = Pricing(date: .now, price: price, comment: comment)
             pricing.product = currentProduct
             
             modelContext.insert(pricing)

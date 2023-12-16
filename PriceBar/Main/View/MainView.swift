@@ -17,12 +17,14 @@ struct MainView: View {
     @State private var product: CloudProduct
     @State private var pricings: [CloudPricing]
     @State private var newPrice: String
+    @State private var newComment: String
         
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
         _info = State<MainViewModel.ScannedInfo>(initialValue: .idle)
         _newName = State<String>(initialValue: "")
         _newPrice = State<String>(initialValue: "")
+        _newComment = State<String>(initialValue: "")
         _product = State<CloudProduct>(initialValue: .empty)
         _pricings = State<[CloudPricing]>(initialValue: [])
     }
@@ -38,12 +40,12 @@ struct MainView: View {
                 let product = Product(barcode: newProduct.barcode, name: newProduct.name)
                 
                 viewModel.newProductTapSubject.send(product)
-                viewModel.newPriceTapSubject.send(newPrice.double)
+                viewModel.newPriceTapSubject.send((newPrice.double, newComment))
             })
             
             if product.barcode != "..." {
-                PriceInputView(newPrice:  $newPrice, info: info, product: product) { price in
-                    viewModel.newPriceTapSubject.send(price)
+                PriceInputView(newPrice:  $newPrice, newComment: $newComment, info: info, product: product) { price, comment in
+                    viewModel.newPriceTapSubject.send((price, comment))
                 }
                 PriceListView(pricings: pricings)
             }
@@ -60,7 +62,7 @@ struct MainView: View {
                 break
             case let .found(product):
                 self.product = .init(barcode: product.barcode, name: product.name)
-                self.pricings = product.pricings.map { CloudPricing(date: $0.date, barcode: product.barcode, price: $0.price)}
+                self.pricings = product.pricings.map { CloudPricing(date: $0.date, barcode: product.barcode, price: $0.price, comment: $0.comment)}
                 self.newPrice = ""
             case let .new(barcode):
                 self.product = .init(barcode: barcode, name: "")

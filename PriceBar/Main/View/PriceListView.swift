@@ -33,6 +33,16 @@ struct PriceListView: View {
                         .font(.system(size: 14, weight: .bold))
                         .multilineTextAlignment(.center)
                         .foregroundColor(.green)
+                    
+                    Text(" -- ")
+                        .font(.system(size: 14, weight: .bold))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.black)
+                    
+                    Text(pricing.comment ?? "")
+                        .font(.system(size: 14, weight: .bold))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.gray)
                 }
             }
         }

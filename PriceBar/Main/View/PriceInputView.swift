@@ -11,19 +11,27 @@ import Utils
 struct PriceInputView: View {
     
     @Binding var newPrice: String
+    @Binding var newComment: String
 
     let info: MainViewModel.ScannedInfo
     let product: CloudProduct
     
-    var newPriceTapSubject: ((Double) -> Void)
+    var newPriceTapSubject: ((Double, String) -> Void)
     
     var body: some View {
             HStack {
-                TextField("Введите цену", text: $newPrice)
-                    .font(.system(size: 30, weight: .bold))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.blue)
-                    .keyboardType(.decimalPad)
+                VStack {
+                    TextField("Введите цену", text: $newPrice)
+                        .font(.system(size: 30, weight: .bold))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.blue)
+                        .keyboardType(.decimalPad)
+                    
+                    TextField("Комментарий", text: $newComment)
+                        .font(.system(size: 30, weight: .bold))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.blue)
+                }
                 
                 if !info.isNew {
                     var priceButtonEnabled : Bool {
@@ -31,9 +39,9 @@ struct PriceInputView: View {
                     }
                     
                     Button {
-                        debugPrint("\(newPrice) \(newPrice.double)")
-                        newPriceTapSubject(newPrice.double)
+                        newPriceTapSubject(newPrice.double, newComment)
                         newPrice = ""
+                        newComment = ""
                         hideKeyboard()
                     } label: {
                         Text("+")
