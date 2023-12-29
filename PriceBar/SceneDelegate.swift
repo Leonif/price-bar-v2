@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import SwiftData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private let navigationController = UINavigationController()
-    private lazy var coordinator = MainCoordinator(navigationController: navigationController)
+    private lazy var coordinator = MainCoordinator(navigationController: navigationController, modelContext: createModelContext())
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -21,6 +22,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         coordinator.start()
         self.window = window
+    }
+    
+    @MainActor
+    private func createModelContext() -> ModelContext  {
+        return try! ModelContainer(for: Product.self, Pricing.self).mainContext
     }
 }
 

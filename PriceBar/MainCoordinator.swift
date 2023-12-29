@@ -14,31 +14,34 @@ final class MainCoordinator {
     private let navigationController: UINavigationController
     private var cancellables = Set<AnyCancellable>()
     private var mainViewModel: MainViewModel?
+    private let modelContext: ModelContext
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, modelContext: ModelContext) {
         self.navigationController = navigationController
+        self.modelContext = modelContext
     }
     
     @MainActor 
     func start() {
-        let mainViewModel = MainViewModel(modelContext: createModelContext())
-        let mainView = MainView(viewModel: mainViewModel)
+        let viewModel = MainViewModel(modelContext: modelContext)
+        let viewController = MainView(viewModel: viewModel).asViewController
         
-        self.mainViewModel = mainViewModel
-
-        let vc = UIHostingController(rootView: mainView)
-        vc.navigationItem.title = "Сканер продуктов"
-
+        self.mainViewModel = viewModel
         self.mainViewModel?.scanButtonTapSubject.sink { [weak self] in
             self?.showScanScreen()
         }.store(in: &cancellables)
         
-        navigationController.setViewControllers([vc], animated: true)
+        self.mainViewModel?.showHistorySubject.sink { [weak self] in
+            self?.showHistory()
+        }.store(in: &cancellables)
+        
+        navigationController.setViewControllers([viewController], animated: true)
     }
     
-    @MainActor 
-    private func createModelContext() -> ModelContext  {
-        return try! ModelContainer(for: Product.self, Pricing.self).mainContext
+    private func showHistory() {
+        let viewModel = HistoryViewModel(modelContext: modelContext)
+        let viewController = HistoryView(viewModel: viewModel).asViewController
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     private func showScanScreen() {
@@ -50,5 +53,12 @@ final class MainCoordinator {
         }.store(in: &cancellables)
         
         navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+
+extension View {
+    var asViewController: UIViewController {
+        UIHostingController(rootView: self)
     }
 }

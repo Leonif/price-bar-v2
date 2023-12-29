@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3311C0CC2B3C47F600B2D02E /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3311C0CB2B3C47F600B2D02E /* History.swift */; };
+		333749942B3C434400084028 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333749932B3C434400084028 /* HistoryView.swift */; };
+		333749962B3C45A800084028 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333749952B3C45A800084028 /* HistoryViewModel.swift */; };
 		335B05D72B225F4D0066895B /* pricing.json in Resources */ = {isa = PBXBuildFile; fileRef = 335B05D62B225F4D0066895B /* pricing.json */; };
 		335B05D92B22618D0066895B /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = 335B05D82B22618D0066895B /* products.json */; };
 		335B05E22B2317F70066895B /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 335B05E12B2317F70066895B /* Utils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -69,6 +72,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3311C0CB2B3C47F600B2D02E /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		333749932B3C434400084028 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		333749952B3C45A800084028 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		335B05D62B225F4D0066895B /* pricing.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pricing.json; sourceTree = "<group>"; };
 		335B05D82B22618D0066895B /* products.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
 		335B05DF2B2317F70066895B /* Utils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Utils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +131,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		333749972B3C45B800084028 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				333749932B3C434400084028 /* HistoryView.swift */,
+				333749952B3C45A800084028 /* HistoryViewModel.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		335B05E02B2317F70066895B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +209,7 @@
 				33BD8CB22B1DC9F200612B1D /* entities */,
 				336890432A3F597D0080E02A /* Main */,
 				3368903A2A3F54400080E02A /* BarcodeScanner */,
+				333749972B3C45B800084028 /* History */,
 				3368902D2A3F3A230080E02A /* Assets.xcassets */,
 				3368902F2A3F3A230080E02A /* LaunchScreen.storyboard */,
 				336890322A3F3A230080E02A /* Info.plist */,
@@ -224,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				33BD8CB02B1DC9ED00612B1D /* Pricing.swift */,
+				3311C0CB2B3C47F600B2D02E /* History.swift */,
 				33BD8CAE2B1DC9E300612B1D /* Product.swift */,
 			);
 			path = entities;
@@ -399,15 +416,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3311C0CC2B3C47F600B2D02E /* History.swift in Sources */,
 				33FE009B2B1A613D00CC4441 /* PriceListView.swift in Sources */,
 				33FE009D2B1A647500CC4441 /* PriceInputView.swift in Sources */,
 				3368903E2A3F55E50080E02A /* BarcodeScannerView.swift in Sources */,
 				33BD8CAD2B1CA7D100612B1D /* ScanButtonView.swift in Sources */,
+				333749962B3C45A800084028 /* HistoryViewModel.swift in Sources */,
 				336890402A3F57BF0080E02A /* MainCoordinator.swift in Sources */,
 				33FE00992B1A5D5600CC4441 /* ProductNameInputView.swift in Sources */,
 				33BD8CB12B1DC9ED00612B1D /* Pricing.swift in Sources */,
 				3368903C2A3F54B30080E02A /* BaseViewController.swift in Sources */,
 				336890292A3F3A210080E02A /* BarcodeScannerViewController.swift in Sources */,
+				333749942B3C434400084028 /* HistoryView.swift in Sources */,
 				336890252A3F3A210080E02A /* AppDelegate.swift in Sources */,
 				336890392A3F543A0080E02A /* BarcodeScannerViewModel.swift in Sources */,
 				336890272A3F3A210080E02A /* SceneDelegate.swift in Sources */,

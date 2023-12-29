@@ -34,4 +34,5 @@ struct CloudProduct: Decodable {
     let name: String
     
     static let empty = CloudProduct(barcode: "...", name: "...")
+    static let mock = CloudProduct(barcode: "4016369961599", name: "Lacalut")
 }

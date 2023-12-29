@@ -22,16 +22,31 @@ struct PriceInputView: View {
             HStack {
                 VStack {
                     TextField("Введите цену", text: $newPrice)
-                        .font(.system(size: 30, weight: .bold))
+                        .font(.system(size: 20, weight: .semibold))
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 8)
+                        .frame(height: 40)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.black, lineWidth: 1)
+                        )
                         .multilineTextAlignment(.center)
                         .foregroundColor(.blue)
                         .keyboardType(.decimalPad)
                     
                     TextField("Комментарий", text: $newComment)
-                        .font(.system(size: 30, weight: .bold))
+                        .font(.system(size: 20, weight: .semibold))
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 8)
+                        .frame(height: 40)
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.black, lineWidth: 1))
                         .multilineTextAlignment(.center)
                         .foregroundColor(.blue)
+                        .foregroundColor(.blue)
                 }
+                .padding(.leading, 8)
+                .padding(.top, 8)
+                .padding(.bottom, 8)
                 
                 if !info.isNew {
                     var priceButtonEnabled : Bool {
@@ -54,4 +69,8 @@ struct PriceInputView: View {
             }
         
     }
+}
+
+#Preview {
+    PriceInputView(newPrice: .constant(""), newComment: .constant(""), info: .idle, product: .mock, newPriceTapSubject: {_,_ in })
 }

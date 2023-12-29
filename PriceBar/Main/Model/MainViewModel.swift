@@ -10,8 +10,26 @@ import SwiftUI
 import SwiftData
 import Utils
 
+protocol MainViewModelInterface: ObservableObject {
+    
+    var initialProduct: CloudProduct { get }
+    
+    var scanButtonTapSubject: PassthroughSubject<Void, Never> { get }
+    var showHistorySubject: PassthroughSubject<Void, Never> { get }
+    var newProductTapSubject: PassthroughSubject<Product, Never> { get }
+    var newPriceTapSubject: PassthroughSubject<(Double, String), Never> { get }
+    var resultBarcodeScanning: PassthroughSubject<MainViewModel.ScannedInfo, Never> { get }
+    
+    func loadData()
+}
+
+
+
+
 @Observable
-final class MainViewModel: ObservableObject {
+final class MainViewModel: MainViewModelInterface {
+    var initialProduct = CloudProduct.empty
+    
  
     var products: [Product] = []
     var pricing: [Pricing] = []
@@ -21,6 +39,7 @@ final class MainViewModel: ObservableObject {
     let modelContext: ModelContext
     
     var scanButtonTapSubject = PassthroughSubject<Void, Never>()
+    var showHistorySubject = PassthroughSubject<Void, Never>()
     var newProductTapSubject = PassthroughSubject<Product, Never>()
     var newPriceTapSubject = PassthroughSubject<(Double, String), Never>()
     var barcodeScannedSubject = PassthroughSubject<String, Never>()
@@ -62,7 +81,7 @@ final class MainViewModel: ObservableObject {
         cleanIfNeed()
         printNewComers()
     }
-    
+   
     private func addDefaultProducts() {
         for cpd in cloudProducts {
             if let index = products.firstIndex(where: { $0.barcode == cpd.barcode }) {
@@ -198,4 +217,21 @@ extension MainViewModel {
             }
         }
     }
+}
+
+
+@Observable
+final class MainViewModelMock: MainViewModelInterface {
+    var initialProduct = CloudProduct.mock
+    
+    var scanButtonTapSubject = PassthroughSubject<Void, Never>()
+    var showHistorySubject = PassthroughSubject<Void, Never>()
+    var newProductTapSubject = PassthroughSubject<Product, Never>()
+    var newPriceTapSubject = PassthroughSubject<(Double, String), Never>()
+    var resultBarcodeScanning = PassthroughSubject<MainViewModel.ScannedInfo, Never>()
+    
+    func loadData() {
+       
+    }
+    
 }

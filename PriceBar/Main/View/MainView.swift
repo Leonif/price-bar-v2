@@ -7,32 +7,34 @@
 
 import SwiftUI
 import Combine
+import SwiftData
 
-struct MainView: View {
-
-    @ObservedObject var viewModel: MainViewModel
-
+struct MainView<ViewModel>: View where ViewModel: MainViewModelInterface {
+    
+    @ObservedObject var viewModel: ViewModel
+    
     @State private var info: MainViewModel.ScannedInfo
     @State private var newName: String
     @State private var product: CloudProduct
     @State private var pricings: [CloudPricing]
     @State private var newPrice: String
     @State private var newComment: String
-        
-    init(viewModel: MainViewModel) {
+    
+    init(viewModel: ViewModel) {
         self.viewModel = viewModel
         _info = State<MainViewModel.ScannedInfo>(initialValue: .idle)
         _newName = State<String>(initialValue: "")
         _newPrice = State<String>(initialValue: "")
         _newComment = State<String>(initialValue: "")
-        _product = State<CloudProduct>(initialValue: .empty)
+        _product = State<CloudProduct>(initialValue: viewModel.initialProduct)
         _pricings = State<[CloudPricing]>(initialValue: [])
     }
     
     var body: some View {
         VStack(spacing: 16) {
+            
             ProductNameInputView(newName: $newName, info: info, product: product)
-
+            
             ScanButtonView(newName: $newName, info: info, product: product, scanButtonTap: {
                 viewModel.scanButtonTapSubject.send()
             }, newProductButtonTap: { newProduct in
@@ -50,6 +52,10 @@ struct MainView: View {
                 PriceListView(pricings: pricings)
             }
         }
+        .navigationTitle("Сканер цін")
+        .navigationBarItems(trailing: Button("History") {
+            viewModel.showHistorySubject.send()
+        })
         .padding(16)
         .background(Color.white)
         .onAppear {
@@ -64,6 +70,7 @@ struct MainView: View {
                 self.product = .init(barcode: product.barcode, name: product.name)
                 self.pricings = product.pricings.map { CloudPricing(date: $0.date, barcode: product.barcode, price: $0.price, comment: $0.comment)}
                 self.newPrice = ""
+                self.newComment = ""
             case let .new(barcode):
                 self.product = .init(barcode: barcode, name: "")
                 self.pricings = []
@@ -73,6 +80,16 @@ struct MainView: View {
     }
 }
 
+
+#Preview {
+    @MainActor
+    func createModelContext() -> ModelContext  {
+        return try! ModelContainer(for: Product.self, Pricing.self).mainContext
+    }
+    
+    let mainViewModel = MainViewModelMock()
+    return MainView(viewModel: mainViewModel)
+}
 
 extension View {
     func hideKeyboard() {
