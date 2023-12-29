@@ -45,20 +45,13 @@ final class MainCoordinator {
     }
     
     private func showScanScreen() {
-        let vm = BarcodeScannerViewModel()
-        let vc = BarcodeScannerViewController(viewModel: vm)
-        vm.completedSubject.sink { [weak self] barcode in
+        let viewModel = BarcodeScannerViewModel()
+        let viewController = BarcodeScannerViewController(viewModel: viewModel)
+        viewModel.completedSubject.sink { [weak self] barcode in
             self?.mainViewModel?.barcodeScannedSubject.send(barcode)
             self?.navigationController.popViewController(animated: true)
         }.store(in: &cancellables)
         
-        navigationController.pushViewController(vc, animated: true)
-    }
-}
-
-
-extension View {
-    var asViewController: UIViewController {
-        UIHostingController(rootView: self)
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

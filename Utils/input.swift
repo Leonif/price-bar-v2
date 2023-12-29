@@ -6,6 +6,7 @@
 //
 
 import SwiftData
+import SwiftUI
 
 public extension DateFormatter {
     static let iso8601Full: DateFormatter = {
@@ -89,5 +90,12 @@ public extension Int {
     
     var double: Double {
         Double(self)
+    }
+}
+
+
+public extension View {
+    var asViewController: UIViewController {
+        UIHostingController(rootView: self)
     }
 }

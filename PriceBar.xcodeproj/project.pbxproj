@@ -131,6 +131,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3311C0CD2B3EBF6300B2D02E /* SupportedFiles */ = {
+			isa = PBXGroup;
+			children = (
+				3368903B2A3F54B30080E02A /* BaseViewController.swift */,
+				3368902F2A3F3A230080E02A /* LaunchScreen.storyboard */,
+				336890242A3F3A210080E02A /* AppDelegate.swift */,
+				336890262A3F3A210080E02A /* SceneDelegate.swift */,
+				3368902D2A3F3A230080E02A /* Assets.xcassets */,
+				336890322A3F3A230080E02A /* Info.plist */,
+			);
+			path = SupportedFiles;
+			sourceTree = "<group>";
+		};
+		3311C0CE2B3EBFE400B2D02E /* MainFlow */ = {
+			isa = PBXGroup;
+			children = (
+				3368903F2A3F57BF0080E02A /* MainCoordinator.swift */,
+				336890432A3F597D0080E02A /* Main */,
+				3368903A2A3F54400080E02A /* BarcodeScanner */,
+				333749972B3C45B800084028 /* History */,
+			);
+			path = MainFlow;
+			sourceTree = "<group>";
+		};
+		3311C0CF2B3EC03C00B2D02E /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		3311C0D02B3EC16F00B2D02E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				336890282A3F3A210080E02A /* BarcodeScannerViewController.swift */,
+				3368903D2A3F55E50080E02A /* BarcodeScannerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3311C0D12B3EC17600B2D02E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				336890382A3F543A0080E02A /* BarcodeScannerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		333749972B3C45B800084028 /* History */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +233,7 @@
 				33E45D262B08B55E003A335D /* Model */,
 				335B05E02B2317F70066895B /* Utils */,
 				336890222A3F3A210080E02A /* Products */,
+				3311C0CF2B3EC03C00B2D02E /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -201,18 +250,10 @@
 		336890232A3F3A210080E02A /* PriceBar */ = {
 			isa = PBXGroup;
 			children = (
-				336890242A3F3A210080E02A /* AppDelegate.swift */,
-				336890262A3F3A210080E02A /* SceneDelegate.swift */,
-				3368903F2A3F57BF0080E02A /* MainCoordinator.swift */,
-				3368903B2A3F54B30080E02A /* BaseViewController.swift */,
+				3311C0CD2B3EBF6300B2D02E /* SupportedFiles */,
 				335B05EC2B23184F0066895B /* defaultData */,
 				33BD8CB22B1DC9F200612B1D /* entities */,
-				336890432A3F597D0080E02A /* Main */,
-				3368903A2A3F54400080E02A /* BarcodeScanner */,
-				333749972B3C45B800084028 /* History */,
-				3368902D2A3F3A230080E02A /* Assets.xcassets */,
-				3368902F2A3F3A230080E02A /* LaunchScreen.storyboard */,
-				336890322A3F3A230080E02A /* Info.plist */,
+				3311C0CE2B3EBFE400B2D02E /* MainFlow */,
 			);
 			path = PriceBar;
 			sourceTree = "<group>";
@@ -220,9 +261,8 @@
 		3368903A2A3F54400080E02A /* BarcodeScanner */ = {
 			isa = PBXGroup;
 			children = (
-				336890282A3F3A210080E02A /* BarcodeScannerViewController.swift */,
-				3368903D2A3F55E50080E02A /* BarcodeScannerView.swift */,
-				336890382A3F543A0080E02A /* BarcodeScannerViewModel.swift */,
+				3311C0D02B3EC16F00B2D02E /* View */,
+				3311C0D12B3EC17600B2D02E /* ViewModel */,
 			);
 			path = BarcodeScanner;
 			sourceTree = "<group>";
@@ -230,8 +270,8 @@
 		336890432A3F597D0080E02A /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				335B05EE2B2318760066895B /* Model */,
 				335B05ED2B23186E0066895B /* View */,
+				335B05EE2B2318760066895B /* Model */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -676,7 +716,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JFBC3P353F;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PriceBar/Info.plist;
+				INFOPLIST_FILE = PriceBar/SupportedFiles/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "access to camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -706,7 +746,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JFBC3P353F;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PriceBar/Info.plist;
+				INFOPLIST_FILE = PriceBar/SupportedFiles/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "access to camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
