@@ -134,6 +134,7 @@
 		3311C0CD2B3EBF6300B2D02E /* SupportedFiles */ = {
 			isa = PBXGroup;
 			children = (
+				335B05EC2B23184F0066895B /* defaultData */,
 				3368903B2A3F54B30080E02A /* BaseViewController.swift */,
 				3368902F2A3F3A230080E02A /* LaunchScreen.storyboard */,
 				336890242A3F3A210080E02A /* AppDelegate.swift */,
@@ -153,13 +154,6 @@
 				333749972B3C45B800084028 /* History */,
 			);
 			path = MainFlow;
-			sourceTree = "<group>";
-		};
-		3311C0CF2B3EC03C00B2D02E /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		3311C0D02B3EC16F00B2D02E /* View */ = {
@@ -233,7 +227,6 @@
 				33E45D262B08B55E003A335D /* Model */,
 				335B05E02B2317F70066895B /* Utils */,
 				336890222A3F3A210080E02A /* Products */,
-				3311C0CF2B3EC03C00B2D02E /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -251,7 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				3311C0CD2B3EBF6300B2D02E /* SupportedFiles */,
-				335B05EC2B23184F0066895B /* defaultData */,
 				33BD8CB22B1DC9F200612B1D /* entities */,
 				3311C0CE2B3EBFE400B2D02E /* MainFlow */,
 			);
@@ -712,6 +704,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JFBC3P353F;
@@ -730,6 +723,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lion.price.bar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -742,6 +736,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JFBC3P353F;
@@ -760,6 +755,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lion.price.bar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

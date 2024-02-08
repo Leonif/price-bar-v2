@@ -41,6 +41,11 @@ final class MainCoordinator {
     private func showHistory() {
         let viewModel = HistoryViewModel(modelContext: modelContext)
         let viewController = HistoryView(viewModel: viewModel).asViewController
+        viewModel.historySelectedSubject.sink { [weak self] history in
+            guard let self else { return }
+            self.navigationController.popViewController(animated: true)
+            self.mainViewModel?.historySelectedSubject.send(history)
+        }.store(in: &cancellables)
         navigationController.pushViewController(viewController, animated: true)
     }
     

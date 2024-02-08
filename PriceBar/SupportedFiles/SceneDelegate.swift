@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     @MainActor
     private func createModelContext() -> ModelContext  {
-        return try! ModelContainer(for: Product.self, Pricing.self).mainContext
+        return try! ModelContainer(for: Product.self, Pricing.self, History.self).mainContext
     }
 }
 

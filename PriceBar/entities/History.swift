@@ -11,7 +11,11 @@ import Foundation
 @Model
 class History {
     let id = UUID().uuidString
+    let date: Date
+    @Relationship let product: Product
     
-    init(date: Date, price: Double, comment: String?) {
+    init(date: Date, product: Product) {
+        self.date = date
+        self.product = product
     }
 }

@@ -32,7 +32,6 @@ struct MainView<ViewModel>: View where ViewModel: MainViewModelInterface {
     
     var body: some View {
         VStack(spacing: 16) {
-            
             ProductNameInputView(newName: $newName, info: info, product: product)
             
             ScanButtonView(newName: $newName, info: info, product: product, scanButtonTap: {
@@ -53,7 +52,7 @@ struct MainView<ViewModel>: View where ViewModel: MainViewModelInterface {
             }
         }
         .navigationTitle("Сканер цін")
-        .navigationBarItems(trailing: Button("History") {
+        .navigationBarItems(trailing: Button("Історія") {
             viewModel.showHistorySubject.send()
         })
         .padding(16)

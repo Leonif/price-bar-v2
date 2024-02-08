@@ -23,14 +23,10 @@ protocol MainViewModelInterface: ObservableObject {
     func loadData()
 }
 
-
-
-
 @Observable
 final class MainViewModel: MainViewModelInterface {
     var initialProduct = CloudProduct.empty
-    
- 
+
     var products: [Product] = []
     var pricing: [Pricing] = []
     
@@ -43,6 +39,7 @@ final class MainViewModel: MainViewModelInterface {
     var newProductTapSubject = PassthroughSubject<Product, Never>()
     var newPriceTapSubject = PassthroughSubject<(Double, String), Never>()
     var barcodeScannedSubject = PassthroughSubject<String, Never>()
+    var historySelectedSubject = PassthroughSubject<History, Never>()
     var resultBarcodeScanning = PassthroughSubject<ScannedInfo, Never>()
     
     private var cancellables = Set<AnyCancellable>()
@@ -72,6 +69,7 @@ final class MainViewModel: MainViewModelInterface {
     
     
     func loadData() {
+        guard products.isEmpty else { return }
         products = modelContext.readFromDb()
         pricing = modelContext.readFromDb()
         
@@ -155,9 +153,18 @@ final class MainViewModel: MainViewModelInterface {
             if let product = products.first(where: { $0.barcode == barcode }) {
                 currentProduct = product
                 self.resultBarcodeScanning.send(.found(product))
+                updateHistory(product: product)
             } else {
                 currentProduct = nil
                 self.resultBarcodeScanning.send(.new(barcode: barcode))
+            }
+        }.store(in: &cancellables)
+        
+        historySelectedSubject.sink { [weak self] history in
+            guard let self else { return }
+            if let product = products.first(where: { $0.barcode == history.product.barcode }) {
+                currentProduct = product
+                self.resultBarcodeScanning.send(.found(product))
             }
         }.store(in: &cancellables)
         
@@ -172,6 +179,7 @@ final class MainViewModel: MainViewModelInterface {
             }
             loadData()
             self.resultBarcodeScanning.send(.found(newProduct))
+            self.updateHistory(product: newProduct)
         }.store(in: &cancellables)
         
         newPriceTapSubject.sink { [weak self] (price, comment) in
@@ -190,6 +198,11 @@ final class MainViewModel: MainViewModelInterface {
             }
             
         }.store(in: &cancellables)
+    }
+    
+    private func updateHistory(product: Product) {
+        let history = History(date: Date(), product: product)
+        modelContext.insert(history)
     }
     
     private func saveModel() {
