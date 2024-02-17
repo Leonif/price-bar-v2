@@ -25,11 +25,6 @@ final class HistoryViewModel: HistoryViewModelInterface {
     
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
-        setupBinding()
-    }
-    
-    private func setupBinding() {
-    
     }
     
     func loadData() {

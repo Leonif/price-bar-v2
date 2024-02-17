@@ -52,9 +52,14 @@ struct MainView<ViewModel>: View where ViewModel: MainViewModelInterface {
             }
         }
         .navigationTitle("Сканер цін")
-        .navigationBarItems(trailing: Button("Історія") {
-            viewModel.showHistorySubject.send()
-        })
+        .navigationBarItems(
+            leading: Button("Пошук") {
+                viewModel.showSearchSubject.send()
+            },
+            
+            trailing: Button("Історія") {
+                viewModel.showHistorySubject.send()
+            })
         .padding(16)
         .background(Color.white)
         .onAppear {

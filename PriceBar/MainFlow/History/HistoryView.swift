@@ -59,17 +59,7 @@ struct HistoryItemView: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(.blue)
             
-            HStack(alignment: .top) {
-                Text(history.product.barcode)
-                    .font(.system(size: 14, weight: .bold))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.black)
-                
-                Text(history.product.name)
-                    .font(.system(size: 14, weight: .bold))
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.black)
-            }
+            ProductItemView(product: history.product)
         }
     }
 }

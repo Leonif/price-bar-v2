@@ -45,6 +45,16 @@ public extension ModelContext {
             return []
         }
     }
+    
+    func filterFromDb<T: PersistentModel>(predicate: Predicate<T>) -> [T] {
+        do {
+            let fetchProductDescriptor = FetchDescriptor<T>(predicate: predicate)
+            return try self.fetch(fetchProductDescriptor)
+        } catch let error {
+            debugPrint(error)
+            return []
+        }
+    }
 }
 
 

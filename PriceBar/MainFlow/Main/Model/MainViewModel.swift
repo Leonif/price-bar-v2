@@ -16,6 +16,7 @@ protocol MainViewModelInterface: ObservableObject {
     
     var scanButtonTapSubject: PassthroughSubject<Void, Never> { get }
     var showHistorySubject: PassthroughSubject<Void, Never> { get }
+    var showSearchSubject: PassthroughSubject<Void, Never> { get }
     var newProductTapSubject: PassthroughSubject<Product, Never> { get }
     var newPriceTapSubject: PassthroughSubject<(Double, String), Never> { get }
     var resultBarcodeScanning: PassthroughSubject<MainViewModel.ScannedInfo, Never> { get }
@@ -36,10 +37,11 @@ final class MainViewModel: MainViewModelInterface {
     
     var scanButtonTapSubject = PassthroughSubject<Void, Never>()
     var showHistorySubject = PassthroughSubject<Void, Never>()
+    var showSearchSubject = PassthroughSubject<Void, Never>()
     var newProductTapSubject = PassthroughSubject<Product, Never>()
     var newPriceTapSubject = PassthroughSubject<(Double, String), Never>()
     var barcodeScannedSubject = PassthroughSubject<String, Never>()
-    var historySelectedSubject = PassthroughSubject<History, Never>()
+    var productSelectedSubject = PassthroughSubject<Product, Never>()
     var resultBarcodeScanning = PassthroughSubject<ScannedInfo, Never>()
     
     private var cancellables = Set<AnyCancellable>()
@@ -160,9 +162,9 @@ final class MainViewModel: MainViewModelInterface {
             }
         }.store(in: &cancellables)
         
-        historySelectedSubject.sink { [weak self] history in
+        productSelectedSubject.sink { [weak self] product in
             guard let self else { return }
-            if let product = products.first(where: { $0.barcode == history.product.barcode }) {
+            if let product = products.first(where: { $0.barcode == product.barcode }) {
                 currentProduct = product
                 self.resultBarcodeScanning.send(.found(product))
             }
@@ -235,10 +237,12 @@ extension MainViewModel {
 
 @Observable
 final class MainViewModelMock: MainViewModelInterface {
+    
     var initialProduct = CloudProduct.mock
     
     var scanButtonTapSubject = PassthroughSubject<Void, Never>()
     var showHistorySubject = PassthroughSubject<Void, Never>()
+    var showSearchSubject = PassthroughSubject<Void, Never>()
     var newProductTapSubject = PassthroughSubject<Product, Never>()
     var newPriceTapSubject = PassthroughSubject<(Double, String), Never>()
     var resultBarcodeScanning = PassthroughSubject<MainViewModel.ScannedInfo, Never>()

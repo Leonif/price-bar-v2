@@ -34,6 +34,8 @@
 		33E45D2D2B08B55E003A335D /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E45D252B08B55E003A335D /* Model.framework */; };
 		33E45D2E2B08B55E003A335D /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33E45D252B08B55E003A335D /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		33E595E62A478B76001FED1F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E595E52A478B76001FED1F /* MainView.swift */; };
+		33EE10642B80AE2F00F4DE2D /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE10632B80AE2F00F4DE2D /* SearchView.swift */; };
+		33EE10662B80AE7000F4DE2D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE10652B80AE7000F4DE2D /* SearchViewModel.swift */; };
 		33FE00992B1A5D5600CC4441 /* ProductNameInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE00982B1A5D5600CC4441 /* ProductNameInputView.swift */; };
 		33FE009B2B1A613D00CC4441 /* PriceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE009A2B1A613D00CC4441 /* PriceListView.swift */; };
 		33FE009D2B1A647500CC4441 /* PriceInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE009C2B1A647500CC4441 /* PriceInputView.swift */; };
@@ -99,6 +101,8 @@
 		33E45D272B08B55E003A335D /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		33E45D282B08B55E003A335D /* Model.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Model.docc; sourceTree = "<group>"; };
 		33E595E52A478B76001FED1F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		33EE10632B80AE2F00F4DE2D /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		33EE10652B80AE7000F4DE2D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		33FE00982B1A5D5600CC4441 /* ProductNameInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductNameInputView.swift; sourceTree = "<group>"; };
 		33FE009A2B1A613D00CC4441 /* PriceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceListView.swift; sourceTree = "<group>"; };
 		33FE009C2B1A647500CC4441 /* PriceInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceInputView.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 		3311C0CE2B3EBFE400B2D02E /* MainFlow */ = {
 			isa = PBXGroup;
 			children = (
+				33EE10622B80AE1D00F4DE2D /* Search */,
 				3368903F2A3F57BF0080E02A /* MainCoordinator.swift */,
 				336890432A3F597D0080E02A /* Main */,
 				3368903A2A3F54400080E02A /* BarcodeScanner */,
@@ -285,6 +290,15 @@
 				33E45D282B08B55E003A335D /* Model.docc */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		33EE10622B80AE1D00F4DE2D /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				33EE10632B80AE2F00F4DE2D /* SearchView.swift */,
+				33EE10652B80AE7000F4DE2D /* SearchViewModel.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,10 +463,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3311C0CC2B3C47F600B2D02E /* History.swift in Sources */,
+				33EE10642B80AE2F00F4DE2D /* SearchView.swift in Sources */,
 				33FE009B2B1A613D00CC4441 /* PriceListView.swift in Sources */,
 				33FE009D2B1A647500CC4441 /* PriceInputView.swift in Sources */,
 				3368903E2A3F55E50080E02A /* BarcodeScannerView.swift in Sources */,
 				33BD8CAD2B1CA7D100612B1D /* ScanButtonView.swift in Sources */,
+				33EE10662B80AE7000F4DE2D /* SearchViewModel.swift in Sources */,
 				333749962B3C45A800084028 /* HistoryViewModel.swift in Sources */,
 				336890402A3F57BF0080E02A /* MainCoordinator.swift in Sources */,
 				33FE00992B1A5D5600CC4441 /* ProductNameInputView.swift in Sources */,

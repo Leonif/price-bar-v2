@@ -35,6 +35,10 @@ final class MainCoordinator {
             self?.showHistory()
         }.store(in: &cancellables)
         
+        self.mainViewModel?.showSearchSubject.sink { [weak self] in
+            self?.showSearch()
+        }.store(in: &cancellables)
+        
         navigationController.setViewControllers([viewController], animated: true)
     }
     
@@ -44,7 +48,18 @@ final class MainCoordinator {
         viewModel.historySelectedSubject.sink { [weak self] history in
             guard let self else { return }
             self.navigationController.popViewController(animated: true)
-            self.mainViewModel?.historySelectedSubject.send(history)
+            self.mainViewModel?.productSelectedSubject.send(history.product)
+        }.store(in: &cancellables)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func showSearch() {
+        let viewModel = SearchViewModel(modelContext: modelContext)
+        let viewController = SearchView(viewModel: viewModel).asViewController
+        viewModel.productSelectedSubject.sink { [weak self] product in
+            guard let self else { return }
+            self.navigationController.popViewController(animated: true)
+            self.mainViewModel?.productSelectedSubject.send(product)
         }.store(in: &cancellables)
         navigationController.pushViewController(viewController, animated: true)
     }
