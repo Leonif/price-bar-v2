@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct SearchView<ViewModel>: View where ViewModel: SearchViewModelInterface {
+struct SearchView: View {
     
-    @ObservedObject var viewModel: ViewModel
+    @StateObject var viewModel: SearchViewModel
     @State private var products: [Product] = []
     @FocusState var isFocused: Bool
     

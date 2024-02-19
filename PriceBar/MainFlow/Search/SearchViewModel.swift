@@ -9,19 +9,7 @@ import SwiftData
 import SwiftUI
 import Combine
 
-protocol SearchViewModelInterface: ObservableObject {
-    var productLoadedSubject: PassthroughSubject<[Product], Never> { get }
-    var productSelectedSubject: PassthroughSubject<Product, Never> { get }
-    
-    
-    var searchString: String { get set }
-    
-    func search(_: String)
-    
-}
-
-@Observable
-final class SearchViewModel: SearchViewModelInterface {
+final class SearchViewModel: ObservableObject {
     
     let modelContext: ModelContext
     var productLoadedSubject = PassthroughSubject<[Product], Never>()
@@ -29,10 +17,6 @@ final class SearchViewModel: SearchViewModelInterface {
     var searchString: String = "" { didSet {
         search(searchString)
     }}
-    
-    let predicate = #Predicate<Product> { snippet in
-        snippet.name == "Друзі, коханки і велика халепа - Метью Перрі"
-    }
     
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
@@ -43,7 +27,8 @@ final class SearchViewModel: SearchViewModelInterface {
             if searchString.isEmpty {
                 false
             } else {
-                snippet.name.localizedStandardContains(searchString)
+                snippet.name.localizedStandardContains(searchString) ||
+                snippet.barcode.localizedStandardContains(searchString)
             }
         }
         
