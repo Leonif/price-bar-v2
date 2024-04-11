@@ -17,14 +17,14 @@ struct ProductNameInputView: View {
         Text(product.barcode)
             .font(.system(size: 16, weight: .light))
             .multilineTextAlignment(.center)
-            .foregroundColor(.black)
+            .foregroundColor(Color(ColorResource.black))
         
         switch info {
         case .idle, .found:
             Text(product.name)
                 .font(.system(size: 25, weight: .semibold))
                 .multilineTextAlignment(.center)
-                .foregroundColor(.black)
+                .foregroundColor(Color(ColorResource.black))
         case .new:
             TextField("Введите название", text: $newName)
                 .font(.system(size: 25, weight: .semibold))

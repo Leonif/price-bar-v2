@@ -61,7 +61,7 @@ struct MainView<ViewModel>: View where ViewModel: MainViewModelInterface {
                 viewModel.showHistorySubject.send()
             })
         .padding(16)
-        .background(Color.white)
+        .background(Color(ColorResource.white))
         .onAppear {
             self.viewModel.loadData()
         }

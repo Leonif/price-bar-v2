@@ -52,12 +52,12 @@ struct ProductItemView: View {
                 Text(product.barcode)
                     .font(.system(size: 14, weight: .bold))
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color(ColorResource.black))
                 
                 Text(product.name)
                     .font(.system(size: 14, weight: .bold))
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color(ColorResource.black))
             }
         }
     }
