@@ -15,8 +15,6 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
-            TextField("Пошук", text: $viewModel.searchString).padding(.horizontal, 16)
-                .focused($isFocused, equals: true)
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     let list = Array(products.prefix(50)).sorted(by: { $0.barcode > $1.barcode })
@@ -39,6 +37,23 @@ struct SearchView: View {
         .onReceive(viewModel.productLoadedSubject) { products in
             self.products = products
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar { // Использование .toolbar вместо .navigationBarItems для более гибкого управления
+            ToolbarItem(placement: .principal) { // Размещение в центре навигационного бара
+                HStack {
+                    Image(systemName: "magnifyingglass") // Иконка поиска
+                    TextField("Пошук", text: $viewModel.searchString)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .padding(8)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .frame(maxWidth: .infinity) // Занимает всю доступную ширину
+                        .focused($isFocused, equals: true)
+                }
+                .padding(.horizontal, 16)
+            }
+        }
+        
     }
 }
 
