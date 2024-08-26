@@ -79,7 +79,10 @@ final class MainViewModel: MainViewModelInterface {
         addDefaultPrices()
         
         cleanIfNeed()
-        printNewComers()
+        Task.detached {
+            self.printNewComers()
+        }
+
     }
    
     private func addDefaultProducts() {
